@@ -128,7 +128,7 @@ The solution is designed to handle very large input files efficiently, model dom
     * Meter readings represent normalized time-series data derived by expanding interval records using the meter context.
     * The domain consists of only two stable models: the NMI (meter context) and the meter reading. The 300 record is treated as an input DTO of meter reandings rather than a domain entity.
 
-4. Testing Strategy (TDD)
+3. Testing Strategy (TDD)
    
     Test-driven development is applied to core transformation logic:
 
@@ -154,7 +154,7 @@ The solution is designed to handle very large input files efficiently, model dom
     * Numerical Precision and rounding
     * All fields of NEM12 file validation
 
-5. Technology Stack & Design Choices
+4. Technology Stack & Design Choices
        
     Language: Go
    
@@ -175,13 +175,18 @@ The solution is designed to handle very large input files efficiently, model dom
     * Keeps scope focused and avoids infrastructure concerns
     * Allows easy integration with different downstream systems
 
-6. Rationale for Design Decisions
+5. Rationale for Design Decisions
    
     * Streaming-first design ensures scalability for large files
     * Explicit domain models improve readability and correctness
     * Separation of parsing, transformation, and output enables easy extension
     * Lightweight DDD and TDD provide structure without over-engineering
     * Clear scope boundaries align with time constraints and assessment goals
+  
+6. Concurrency Model
+   
+   NEM12 files are parsed sequentially due to their hierarchical structure (200 → 300 records).
+   To scale throughput, the system supports file-level parallelism where each file is processed by a dedicated parser goroutine and output channel.
 
 ## Future Improvements
      
