@@ -113,14 +113,7 @@ The solution is designed to handle very large input files efficiently, model dom
     * intervalLength
     This is a stateful parsing context, not a persisted domain entity.
     
-    **IntervalRecord (Raw Fact)**
-   
-    Represents raw interval consumption data derived from a 300 record.
-    * intervalDate
-    * consumptionValues[]
-    This model captures raw, semi-structured facts that still require contextual interpretation.
-    
-    **MeterReading (Final Fact)**
+    **MeterReading (Fact)**
    
     Represents a normalized, timestamped meter reading.
     * nmi
@@ -131,10 +124,11 @@ The solution is designed to handle very large input files efficiently, model dom
     **Domain Relationship Summary**
    
     The 200 record defines the meter context,
-    the 300 record provides raw interval facts,
+    the 300 record provides raw interval facts as inputDTO,
     and meter readings represent normalized time-series data derived by expanding interval records using the meter context.
+    The domain consists of only two stable models: the NMI (meter context) and the meter reading. The 300 record is treated as an input DTO of meter reandings rather than a domain entity.
 
-3. Testing Strategy (TDD)
+4. Testing Strategy (TDD)
    
     Test-driven development is applied to core transformation logic:
 
@@ -160,7 +154,7 @@ The solution is designed to handle very large input files efficiently, model dom
     * Numerical Precision and rounding
     * All fields of NEM12 file validation
 
-4. Technology Stack & Design Choices
+5. Technology Stack & Design Choices
        
     Language: Go
    
@@ -181,7 +175,7 @@ The solution is designed to handle very large input files efficiently, model dom
     * Keeps scope focused and avoids infrastructure concerns
     * Allows easy integration with different downstream systems
 
-5. Rationale for Design Decisions
+6. Rationale for Design Decisions
    
     * Streaming-first design ensures scalability for large files
     * Explicit domain models improve readability and correctness
