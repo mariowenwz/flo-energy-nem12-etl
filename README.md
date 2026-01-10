@@ -186,7 +186,9 @@ The solution is designed to handle very large input files efficiently, model dom
 6. Concurrency Model
    
    NEM12 files are parsed sequentially due to their hierarchical structure (200 → 300 records).
-   To scale throughput, the system supports file-level parallelism where each file is processed by a dedicated parser goroutine and output channel.
+   * A buffered channel is used between parser and downstream stages to decouple IO-bound parsing from CPU/IO-bound transformation and persistence.
+   * To scale throughput, the system supports file-level parallelism where each file is processed by a dedicated parser goroutine and output channel.
+   
 
 ## Future Improvements
      
