@@ -123,10 +123,10 @@ The solution is designed to handle very large input files efficiently, model dom
     
     **Domain Relationship Summary**
    
-    The 200 record defines the meter context,
-    the 300 record provides raw interval facts as inputDTO,
-    and meter readings represent normalized time-series data derived by expanding interval records using the meter context.
-    The domain consists of only two stable models: the NMI (meter context) and the meter reading. The 300 record is treated as an input DTO of meter reandings rather than a domain entity.
+    * The 200 record defines the meter context
+    * The 300 record provides raw interval facts as inputDTO
+    * Meter readings represent normalized time-series data derived by expanding interval records using the meter context.
+    * The domain consists of only two stable models: the NMI (meter context) and the meter reading. The 300 record is treated as an input DTO of meter reandings rather than a domain entity.
 
 4. Testing Strategy (TDD)
    
