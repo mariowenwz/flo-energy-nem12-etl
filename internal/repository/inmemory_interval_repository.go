@@ -2,6 +2,8 @@ package repository
 
 import "github.com/mariowenwz/flo-energy-nem12-etl/internal/domain"
 
+// IntervalRepository abstracts persistence of meter readings.
+// The current implementation is in-memory for testing purposes.
 type InMemoryIntervalRepository struct {
     Records []domain.IntervalRecord
 }

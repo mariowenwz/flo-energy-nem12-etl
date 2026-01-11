@@ -17,7 +17,7 @@ type IntervalTransformer interface {
 
 type DefaultIntervalTransformer struct{}
 
-func NewDefaultIntervalTransformer() IntervalTransformer {
+func NewDefaultIntervalTransformer() *DefaultIntervalTransformer {
     return &DefaultIntervalTransformer{}
 }
 

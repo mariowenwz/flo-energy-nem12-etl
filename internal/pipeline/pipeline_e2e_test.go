@@ -12,8 +12,8 @@ import (
 func TestPipeline_EndToEnd_SingleNMI_SingleDay(t *testing.T) {
     // given
     input := strings.NewReader(`
-200,NEM1202009,NMI1234567,30
-300,20240101,1,1,1,1
+200,NEM1201009,E1E2,1,E1,N1,01009,kWh,30,20050610
+300,20050301,0,0,0,0,0,0,0,0,0,0,0,0,0.461
 `)
 
     repo := repository.NewInMemoryIntervalRepository()
@@ -30,7 +30,7 @@ func TestPipeline_EndToEnd_SingleNMI_SingleDay(t *testing.T) {
         t.Fatalf("pipeline failed: %v", err)
     }
 
-    if len(repo.Records) != 4 {
-        t.Fatalf("expected 4 interval records, got %d", len(repo.Records))
+    if len(repo.Records) != 13 {
+        t.Fatalf("expected 13 interval records, got %d", len(repo.Records))
     }
 }
