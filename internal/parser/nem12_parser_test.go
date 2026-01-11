@@ -40,7 +40,7 @@ func TestNEM12Parser_Parse_Single200And300Record(t *testing.T) {
         t.Fatal("expected at least one 300 record")
     }
 
-    if rec.IntervalDate != "2005-03-01" {
+    if rec.IntervalDate != "20050301" {
         t.Errorf("unexpected interval date: %v", rec.IntervalDate)
     }
 

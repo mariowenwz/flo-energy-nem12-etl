@@ -31,7 +31,7 @@ type nem12Parser struct {
 
 func NewNEM12Parser() NEM12Parser {
     return &nem12Parser{
-        records: make(chan Record300, 1000),
+        records: make(chan Record300, 1000), // Used Buffered Channel to decouple IO-bound parsing from CPU/IO-bound transformation and persistence.
     }
 }
 
@@ -100,7 +100,7 @@ func (p *nem12Parser) parse300(fields []string) {
     }
 
     p.records <- Record300{
-        IntervalDate: date.Format("2006-01-02"),
+        IntervalDate: date.Format("20060102"),
         Values:       values,
     }
 }
